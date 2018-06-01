@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/mvc
+       http://www.springframework.org/schema/mvc/spring-mvc.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop.xsd"
+>
+
+
+
+
+    <context:component-scan base-package="cn.njupt.rest_reservation.controller"/>
+    <!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
+    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+        <property name="messageConverters">
+            <list>
+                <bean class="org.springframework.http.converter.ByteArrayHttpMessageConverter"/>
+                <bean class="org.springframework.http.converter.StringHttpMessageConverter">
+                    <property name="supportedMediaTypes">
+                        <list>
+                            <value>text/plain;charset=UTF-8</value>
+                            <value>application/xml;charset=UTF-8</value>
+                        </list>
+                    </property>
+                </bean>
+                <bean class="org.springframework.http.converter.ResourceHttpMessageConverter"/>
+                <bean class="org.springframework.http.converter.xml.SourceHttpMessageConverter"/>
+                <bean class="org.springframework.http.converter.xml.XmlAwareFormHttpMessageConverter"/>
+                <bean class="org.springframework.http.converter.xml.Jaxb2RootElementHttpMessageConverter"/>
+            </list>
+        </property>
+    </bean>
+
+    <!-- 保证页面的静态资源不被拦截 -->
+    <mvc:default-servlet-handler />
+    <mvc:annotation-driven/>
+
+    <mvc:resources  mapping="/static/**" location="/WEB-INF/views/static/"/>
+    <mvc:resources mapping="/js/**" location="/WEB-INF/views/js/"/>
+    <mvc:resources mapping="/lib/**" location="/WEB-INF/views/lib/" />
+    <!--<mvc:resources mapping="/manage/**" location="/WEB-INF/views/manage" />-->
+    <mvc:resources mapping="/**" location="/WEB-INF/views/"/>
+
+
+    <!-- 文件上传 -->
+    <bean id="multipartResolver"
+          class="org.springframework.web.multipart.commons.CommonsMultipartResolver"
+          p:defaultEncoding="UTF-8" p:maxUploadSize="5242880" />
+    <!-- 该异常是SpringMVC在检查上传的文件信息时抛出来的,而且此时还没有进入到Controller方法中 -->
+    <bean id="exceptionResolver" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+        <property name="exceptionMappings">
+            <props>
+                <!-- 遇到MaxUploadSizeExceededException异常时,自动跳转到/WEB-INF/jsp/error_fileupload.jsp页面 -->
+                <prop key="org.springframework.web.multipart.MaxUploadSizeExceededException">error_fileupload</prop>
+            </props>
+        </property>
+    </bean>
+    <!-- 视图解析器 -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/views/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+    <!-- 拦截器用户登录 -->
+    <!--<mvc:interceptors>-->
+    <!--<mvc:interceptor>-->
+    <!--<mvc:mapping path="/admin/**"/> &lt;!&ndash;拦截的url&ndash;&gt;-->
+    <!--<mvc:exclude-mapping path="/admin/resultServlet/validateCode"/> &lt;!&ndash;不拦截验证码url&ndash;&gt;-->
+    <!--<mvc:exclude-mapping path="/admin/login.html"/> &lt;!&ndash;不拦截验证码url&ndash;&gt;-->
+    <!--<mvc:exclude-mapping path="/admin/login.json"/> &lt;!&ndash;不拦截验证码url&ndash;&gt;-->
+    <!--<mvc:exclude-mapping path="/admin/xuan/verifyCode"/> &lt;!&ndash;不拦截的验证码url&ndash;&gt;-->
+    <!--<mvc:exclude-mapping path="/admin/indexSystemInfo.json"/> &lt;!&ndash;不拦截的公司信息url&ndash;&gt;-->
+    <!--<mvc:exclude-mapping path="/admin/index.html"/> &lt;!&ndash;不拦截的首页url&ndash;&gt;-->
+    <!--&lt;!&ndash; 用户登录验证  &ndash;&gt;-->
+    <!--<bean class="com.njbd.pt.interceptor.UserLoginInterceptor"/>-->
+    <!--</mvc:interceptor>-->
+    <!--</mvc:interceptors>-->
+    <!--  系统日志 aop 切面前置拦截 -->
+    <aop:aspectj-autoproxy proxy-target-class="true"/>
+    <!--<bean class="com.njbd.pt.controller.annotation.SystemLogAspect" id="aspect"></bean>-->
+
+
+</beans>
