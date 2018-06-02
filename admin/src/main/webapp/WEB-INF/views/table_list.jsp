@@ -38,8 +38,8 @@
     <span class="select-box">
       <select class="select" id="tableStatus" size="1" name="demo1">
         <option value="-1" selected>选择餐桌状态</option>
-        <option value="1">可用</option>
-        <option value="0">不可用</option>
+        <option value="0">可用</option>
+        <option value="1">不可用</option>
       </select>
     </span>
 </div>
@@ -55,6 +55,7 @@
                 <th width="100">餐桌号</th>
                 <th width="150">座位数</th>
                 <th width="100">当前状态</th>
+                <th width="100">最新更新时间</th>
                 <th width="100">操作</th>
             </tr>
             </thead>

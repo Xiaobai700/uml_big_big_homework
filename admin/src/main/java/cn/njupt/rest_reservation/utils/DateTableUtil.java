@@ -36,6 +36,17 @@ public class DateTableUtil {
                         requestMap.put("tableStatus", jsonObject.get("value").toString());
                     }
                 }
+                else if (jsonObject.get("name").equals("reservationStatus")) {
+                    if (!jsonObject.get("value").toString().equals("-2")) {
+                        requestMap.put("reservationStatus", jsonObject.get("value").toString());
+                    }
+                }
+                else if (jsonObject.get("name").equals("flag")) {
+                    if (!jsonObject.get("value").toString().equals("-1")) {
+                        requestMap.put("flag", jsonObject.get("value").toString());
+                    }
+                }
+
 
 
                 else if (jsonObject.get("name").equals("SearchNames")) {

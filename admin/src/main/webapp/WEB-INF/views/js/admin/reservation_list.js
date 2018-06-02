@@ -1,9 +1,10 @@
 /**
  * Created by zhangqiao on 2018/6/1.
  */
+var table = ""
 jQuery(function(){
     $(document).ready(function(){
-        $("table").dataTable({
+       table = $("table").dataTable({
             "oLanguage": {
                 "sProcessing" : "店小二在拼命加载...",
                 "sLoadingRecords" : "店小二在拼命加载...",
@@ -26,11 +27,18 @@ jQuery(function(){
             "bDestroy": true,
             "bSort": false,
             "bStateSave": true,
-            "bProcessing": false, // 是否显示取数据时的那个等待提示
+            "bProcessing": true, // 是否显示取数据时的那个等待提示
             "bServerSide": true,//这个用来指明是通过服务端来取数据
             "sAjaxSource": "reservation_list.json",//这个是请求的地址
             "fnServerData": retrieveData, // 获取数据的处理函数
             "fnServerParams": function (aoData) {
+                aoData.push({
+                    name: "reservationStatus",
+                    value: $('#reservationStatus option:selected').val()
+                },{
+                    name:"flag",
+                    value: $('#flag option:selected').val()
+                })
             },
             "aoColumns":[
                 { "mData": "id",'sClass':'center',"mRender": function(data, type, full) {
@@ -38,42 +46,77 @@ jQuery(function(){
                     returnStr += '<input type="checkbox" name="choice" value="'+full["id"]+'">';
                     return returnStr;
                 }},
-                { "mData": "userId",'sClass':'center'},
+                { "mData": "userName",'sClass':'center'},
                 { "mData": "mealTime",'sClass':'center'},
                 { "mData": "tablewareNumber",'sClass':'center'},
                 { "mData": "status",'sClass':'center',"mRender": function(data, type, full) {
                     var returnStr="";
                     if(full["status"]==0){
                         returnStr +="客人还未到";
-                    }else  if(full["status"]==0){
-                        returnStr +="可用";
                     }else  if(full["status"]==-1){
                         returnStr +="取消";
                     }else  if(full["status"]==1){
                         returnStr +="客人到达";
                     }else  if(full["status"]==2){
                         returnStr +="调换餐桌";
+                    }else if(full["status"]==3){
+                        returnStr += "用餐结束";
                     }
                     return returnStr;
                 }},
-                { "mData": "remarks",'sClass':'center'},
+                { "mData": "remarks",'sClass':'center',"mRender": function(data, type, full) {
+                    var returnStr="";
+                    if(full["status"] != 2){
+                        returnStr += "/";
+                    }else {
+                        returnStr += "<span style='font-style:italic;color:blue;'>调换为"+full["remarks"]+"号餐桌</span>";
+                    }
+                    return returnStr;
+                }},
                 { "mData": "flag",'sClass':'center',"mRender": function(data, type, full) {
                     var returnStr="";
                     if(full["flag"]==0){
-                        returnStr +="预约";
+                        returnStr +="提前预约";
                     }else{
                         returnStr +="直接进店";
                     }
                     return returnStr;
                 }},
+                { "mData": "createTime",'sClass':'center'},
+                { "mData": "updateTime",'sClass':'center'},
                 { "mData": "id",'sClass':'center',"mRender": function(data, type, full) {
                     var returnStr="";
-                    returnStr += '<i class="Hui-iconfont cursor-pointer" title="调换餐桌" onClick="transfer(\''+full["id"]+'\')" style="font-size: large;">&#xe647;</i>';
-                    returnStr += '&nbsp;&nbsp;<i class="Hui-iconfont cursor-pointer" title="取消" onClick="cancel(\''+full["id"]+'\')" style="color: red;font-size: large;">&#xe66b;</i>';
-                    returnStr += '&nbsp;&nbsp;<i class="Hui-iconfont cursor-pointer" title="记录到达" onClick="record_arrival(\''+full["id"]+'\')" style="font-size: large;">&#xe60c;</i>';
+                    if(full["status"] != -1 && full["status"] != 3){
+                        if(full["status"] == 0){
+                            returnStr += '<i class="Hui-iconfont cursor-pointer" title="调换餐桌" onClick="transfer(\''+full["id"]+'\')" style="font-size: large;">&#xe647;</i>';
+                            returnStr += '&nbsp;&nbsp;<i class="Hui-iconfont cursor-pointer" title="记录到达" onClick="record_arrival(\''+full["id"]+'\')" style="font-size: large;">&#xe60c;</i>';
+                        }else if(full["status"] == 1){
+                            returnStr += '<i class="Hui-iconfont cursor-pointer" title="调换餐桌" onClick="transfer(\''+full["id"]+'\')" style="font-size: large;">&#xe647;</i>';
+                            returnStr += '&nbsp;&nbsp;<i class="Hui-iconfont cursor-pointer" title="取消" onClick="cancel(\''+full["id"]+'\')" style="color: red;font-size: large;">&#xe66b;</i>';
+                            returnStr += '&nbsp;&nbsp;<i class="Hui-iconfont cursor-pointer" title="用餐结束" onClick="end_meal(\''+full["id"]+'\')" style="color: blue;font-size: large;">&#xe6e1;</i>';
+                        }else if(full["status"] == 2){
+                            returnStr += '<i class="Hui-iconfont cursor-pointer" title="调换餐桌" onClick="transfer(\''+full["id"]+'\',)" style="font-size: large;">&#xe647;</i>';
+                            returnStr += '&nbsp;&nbsp;<i class="Hui-iconfont cursor-pointer" title="记录到达" onClick="record_arrival(\''+full["id"]+'\')" style="font-size: large;">&#xe60c;</i>';
+                            returnStr += '&nbsp;&nbsp;<i class="Hui-iconfont cursor-pointer" title="取消" onClick="cancel(\''+full["id"]+'\')" style="color: red;font-size: large;">&#xe66b;</i>';
+                        }
+                    }else {
+                        returnStr +="注意：已取消/结束的预约不能进行任何操作"
+                    }
                     return returnStr;
                 }},
             ]
+        });
+        $("#reservationStatus").change(function () {
+            var reservationStatus = $('#reservationStatus option:selected').val();
+            if (reservationStatus != null && reservationStatus !="") {
+                table.fnDraw();
+            }
+        });
+        $("#flag").change(function () {
+            var flag = $('#flag  option:selected').val();
+            if (flag  != null && flag  !="") {
+                table.fnDraw();
+            }
         });
     });
 });
@@ -102,12 +145,87 @@ function retrieveData( sSource111,aoData111, fnCallback111) {
  w		弹出层宽度（缺省调默认值）
  h		弹出层高度（缺省调默认值）
  */
-/*管理员-增加*/
-function transfer() {
+/*取消预约*/
+function cancel(id) {
+    layer.confirm("确定取消此预约？",function (f) {
+        if(f){
+            $.ajax({
+                url:"cancel_reservation.json",
+                data : {
+                    id:id
+                },
+                type : 'post',
+                success : function(data) {
+                    if (data.code == 0) {
+                        location.reload();
+                        layer.msg(data.msg,{icon: 6, time: 1000});
+                    } else {
+                        layer.msg(data.msg, {icon: 5, time: 1000});
+                    }
+                },
+                error : function(msg) {
+                    layer.msg('操作失败!', {icon: 5, time: 1000});
 
+                }
+            });
+        }
+    })
 }
 
-function cancel() {
-    
+function transfer(id) {
+    //显示所有可用餐桌以供选择（考虑人数合适）
+    layer_show("可选餐桌",'choose_list.html?reservation_id='+id,800,500);
 }
 
+
+function record_arrival(id) {
+    layer.confirm("确定顾客已到店？",function (f) {
+        if(f){
+            $.ajax({
+                url:"record_arrival.json",
+                data : {
+                    id:id
+                },
+                type : 'post',
+                success : function(data) {
+                    if (data.code == 0) {
+                        location.reload();
+                        layer.msg(data.msg,{icon: 6, time: 1000});
+                    } else {
+                        layer.msg(data.msg, {icon: 5, time: 1000});
+                    }
+                },
+                error : function(msg) {
+                    layer.msg('操作失败!', {icon: 5, time: 1000});
+
+                }
+            });
+        }
+    })
+}
+
+function end_meal(id) {
+    layer.confirm("确定顾客已买单？",function (f) {
+        if(f){
+            $.ajax({
+                url:"end_meal.json",
+                data : {
+                    id:id
+                },
+                type : 'post',
+                success : function(data) {
+                    if (data.code == 0) {
+                        location.reload();
+                        layer.msg(data.msg,{icon: 6, time: 1000});
+                    } else {
+                        layer.msg(data.msg, {icon: 5, time: 1000});
+                    }
+                },
+                error : function(msg) {
+                    layer.msg('操作失败!', {icon: 5, time: 1000});
+
+                }
+            });
+        }
+    })
+}

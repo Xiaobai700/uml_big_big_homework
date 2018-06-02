@@ -17,6 +17,12 @@ public class PageController {
         return modelAndView;
     }
 
+    @RequestMapping(value = "welcome.html")
+    public ModelAndView welcome()throws Exception{
+        ModelAndView modelAndView = new ModelAndView("welcome");
+        return modelAndView;
+    }
+
     @RequestMapping(value = "index.html")
     public ModelAndView index()throws Exception{
         ModelAndView modelAndView = new ModelAndView("index");
@@ -38,6 +44,13 @@ public class PageController {
     @RequestMapping(value = "table_list.html")
     public ModelAndView table_list()throws Exception{
         ModelAndView modelAndView = new ModelAndView("table_list");
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "choose_list.html")
+    public ModelAndView choose_list(Integer reservation_id)throws Exception{
+        ModelAndView modelAndView = new ModelAndView("choose_table");
+        modelAndView.addObject("reservationId",reservation_id);
         return modelAndView;
     }
 

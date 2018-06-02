@@ -47,6 +47,103 @@ public class ReservationController {
             outWriter.write(mapper.writeValueAsString(returnMap));
         }
         return;
-
     }
+
+    @ResponseBody
+    @RequestMapping(value = "cancel_reservation.json")
+    public void cancel_reservation(HttpServletResponse response,
+                              Integer id)throws  Exception{
+        response.setContentType("application/json;charset=UTF-8");
+        PrintWriter outWriter = response.getWriter();
+        ObjectMapper mapper = new ObjectMapper();
+        SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        mapper.setDateFormat(fmt);
+
+        Map returnMap = new HashMap();
+        try {
+            Map requestMap = new HashMap();
+            requestMap.put("id",id);
+            returnMap =reservationService.cancel_reservation(requestMap);
+            System.out.println("returnMap:"+returnMap);
+            outWriter.write(mapper.writeValueAsString(returnMap));
+        }catch (Exception e){
+            outWriter.write(mapper.writeValueAsString(returnMap));
+        }
+        return;
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "transfer_reservation.json")
+    public void transfer_reservation(HttpServletResponse response,
+                                     Integer id,
+                                     Integer newTableId)throws  Exception{
+        response.setContentType("application/json;charset=UTF-8");
+        PrintWriter outWriter = response.getWriter();
+        ObjectMapper mapper = new ObjectMapper();
+        SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        mapper.setDateFormat(fmt);
+
+        Map returnMap = new HashMap();
+        try {
+            Map requestMap = new HashMap();
+            requestMap.put("id",id);
+            requestMap.put("newTableId",newTableId);
+            returnMap =reservationService.transfer_reservation(requestMap);
+            System.out.println("returnMap:"+returnMap);
+            outWriter.write(mapper.writeValueAsString(returnMap));
+        }catch (Exception e){
+            outWriter.write(mapper.writeValueAsString(returnMap));
+        }
+        return;
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "record_arrival.json")
+    public void record_arrival(HttpServletResponse response,
+                                     Integer id)throws  Exception{
+        response.setContentType("application/json;charset=UTF-8");
+        PrintWriter outWriter = response.getWriter();
+        ObjectMapper mapper = new ObjectMapper();
+        SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        mapper.setDateFormat(fmt);
+
+        Map returnMap = new HashMap();
+        try {
+            Map requestMap = new HashMap();
+            requestMap.put("id",id);
+            returnMap =reservationService.record_arrival(requestMap);
+            System.out.println("returnMap:"+returnMap);
+            outWriter.write(mapper.writeValueAsString(returnMap));
+        }catch (Exception e){
+            e.printStackTrace();
+            outWriter.write(mapper.writeValueAsString(returnMap));
+        }
+        return;
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "end_meal.json")
+    public void end_meal(HttpServletResponse response,
+                               Integer id)throws  Exception{
+        response.setContentType("application/json;charset=UTF-8");
+        PrintWriter outWriter = response.getWriter();
+        ObjectMapper mapper = new ObjectMapper();
+        SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        mapper.setDateFormat(fmt);
+
+        Map returnMap = new HashMap();
+        try {
+            Map requestMap = new HashMap();
+            requestMap.put("id",id);
+            returnMap =reservationService.end_meal(requestMap);
+            System.out.println("returnMap:"+returnMap);
+            outWriter.write(mapper.writeValueAsString(returnMap));
+        }catch (Exception e){
+            e.printStackTrace();
+            outWriter.write(mapper.writeValueAsString(returnMap));
+        }
+        return;
+    }
+
+
 }

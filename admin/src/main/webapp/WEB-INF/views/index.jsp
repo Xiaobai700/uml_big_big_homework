@@ -38,18 +38,6 @@
 <header class="navbar-wrapper">
     <div class="navbar navbar-fixed-top">
         <div class="container-fluid cl"> <a class="logo navbar-logo f-l mr-10 hidden-xs" href="#">餐厅预订管理系统</a><span class="logo navbar-slogan f-l mr-10 hidden-xs">v1.0</span> <a aria-hidden="false" class="nav-toggle Hui-iconfont visible-xs" href="javascript:;">&#xe667;</a>
-            <nav class="nav navbar-nav">
-                <ul class="cl">
-                    <li class="dropDown dropDown_hover"><a href="javascript:;" class="dropDown_A"><i class="Hui-iconfont">&#xe600;</i> 新增 <i class="Hui-iconfont">&#xe6d5;</i></a>
-                        <ul class="dropDown-menu menu radius box-shadow">
-                            <li><a href="javascript:;" onclick="add_channel('添加频道','add_channel.html')"><i class="Hui-iconfont">&#xe616;</i> 频道</a></li>
-                            <li><a href="javascript:;" onclick="add_news('添加新闻','add_news.html')"><i class="Hui-iconfont">&#xe613;</i> 新闻</a></li>
-                            <li><a href="javascript:;" onclick="product_add('增加广告','product-add.html')"><i class="Hui-iconfont">&#xe620;</i> 广告</a></li>
-                            <li><a href="javascript:;" onclick="add_admin('添加管理员','add_admin.html','','510')"><i class="Hui-iconfont">&#xe62c;</i> 管理员</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </nav>
             <nav id="Hui-userbar" class="nav navbar-nav navbar-userbar hidden-xs">
                 <ul class="cl">
                     <li>超级管理员</li>
@@ -141,6 +129,7 @@
     <div id="iframe_box" class="Hui-article">
         <div class="show_iframe">
             <div style="display:none" class="loading"></div>
+            <iframe class="J_iframe" name="iframe0" width="100%" height="100%" src="reservation_list.html" frameborder="0" data-id="index_v1.html" seamless></iframe>
         </div>
     </div>
 </section>

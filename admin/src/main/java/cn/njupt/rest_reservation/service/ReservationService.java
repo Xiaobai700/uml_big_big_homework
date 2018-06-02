@@ -10,4 +10,12 @@ import java.util.Map;
 @Component
 public interface ReservationService {
     Map queryAllReservation(Map map);
+
+    Map transfer_reservation(Map map);
+
+    Map cancel_reservation(Map map);
+
+    Map record_arrival(Map map);
+
+    Map end_meal(Map map);
 }

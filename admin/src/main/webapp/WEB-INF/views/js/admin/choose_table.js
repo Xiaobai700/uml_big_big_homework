@@ -1,5 +1,5 @@
 /**
- * Created by zhangqiao on 2018/6/1.
+ * Created by zhangqiao on 2018/6/2.
  */
 var table =""
 jQuery(function(){
@@ -29,13 +29,16 @@ jQuery(function(){
             "bStateSave": true,
             "bProcessing": true, // 是否显示取数据时的那个等待提示
             "bServerSide": true,//这个用来指明是通过服务端来取数据
-            "sAjaxSource": "table_list.json",//这个是请求的地址
+            "sAjaxSource": "choose_list.json?reservationId="+$("#reservationId").val(),//这个是请求的地址
             "fnServerData": retrieveData, // 获取数据的处理函数
             "fnServerParams": function (aoData) {
                 aoData.push({
-                        name: "tableStatus",
-                        value: $('#tableStatus option:selected').val()
-                    })
+                    name: "tableStatus",
+                    value: 0
+                },{
+                    name:"reservationId",
+                    value:$("#reservationId").val()
+                })
             },
             "aoColumns":[
                 { "mData": "id",'sClass':'center',"mRender": function(data, type, full) {
@@ -57,16 +60,10 @@ jQuery(function(){
                 { "mData": "updatetime",'sClass':'center'},
                 { "mData": "id",'sClass':'center',"mRender": function(data, type, full) {
                     var returnStr="";
-                    returnStr += '<i class="Hui-iconfont cursor-pointer" title="禁用" onClick="jinyong(\''+full["id"]+'\')">&#xe6e2;</i>';
+                    returnStr += '<i class="Hui-iconfont cursor-pointer" title="选择" style="font-size: large;" onClick="choose(\''+full["id"]+'\')">&#xe617;</i>';
                     return returnStr;
                 }}
             ]
-        });
-        $("#tableStatus").change(function () {
-            var tableStatus = $('#tableStatus option:selected').val();
-            if (tableStatus != null && tableStatus !="") {
-                table.fnDraw();
-            }
         });
     });
 });
@@ -86,6 +83,29 @@ function retrieveData( sSource111,aoData111, fnCallback111) {
         }
     });
 }
-function jinyong() {
+function choose(id) {
+    layer.confirm("确定调换餐桌？",function (f) {
+        $.ajax({
+            url:"transfer_reservation.json",
+            data : {
+                id:$("#reservationId").val(),
+                newTableId:id
+            },
+            type : 'post',
+            success : function(data) {
+                if (data.code == 0) {
+                    layer.msg(data.msg,{icon: 6, time: 5000});
+                } else {
+                    layer.msg(data.msg, {icon: 5, time: 1000});
+                }
+                 parent.location.reload();
+            },
+            error : function(msg) {
+                layer.msg('操作失败!', {icon: 5, time: 1000});
+
+            }
+        });
+    })
 
 }
+

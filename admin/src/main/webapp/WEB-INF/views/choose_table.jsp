@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: zhangqiao
-  Date: 2018/5/31
-  Time: 18:08
+  Date: 2018/6/2
+  Time: 16:38
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -30,49 +30,22 @@
     <script type="text/javascript" src="http://lib.h-ui.net/DD_belatedPNG_0.0.8a-min.js"></script>
     <script>DD_belatedPNG.fix('*');</script>
     <![endif]-->
-    <title>预约列表</title>
+    <title>餐桌列表</title>
 </head>
 <body>
-<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 预约管理 <span class="c-gray en">&gt;</span> 预约列表 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
-<div style="width: 100%">
-    <div style="width: 220px;background-color: #5a98de;float: left">
-    <span class="select-box">
-      <select class="select" id="reservationStatus" size="1" name="demo1">
-        <option value="-2" selected>选择状态</option>
-        <option value="-1">取消</option>
-        <option value="0">客人还未到</option>
-        <option value="1">客人到达</option>
-        <option value="2">调换餐桌</option>
-        <option value="3">用餐结束</option>
-      </select>
-    </span>
-    </div>
-    <div style="width: 220px;background-color: #5a98de;float: left">
-    <span class="select-box">
-      <select class="select" id="flag" size="1" name="demo1">
-        <option value="-1" selected>选择类型</option>
-        <option value="0">提前预约</option>
-        <option value="1">直接进店</option>
-      </select>
-    </span>
-    </div>
-</div>
+<input type="hidden" value="${reservationId}" id="reservationId">
 <div class="page-c。ontainer">
     <div class="cl pd-5 bg-1 bk-gray mt-20">
         <table class="table table-border table-bordered table-bg">
             <thead>
             <tr>
-                <th scope="col" colspan="9">预约列表</th>
+                <th scope="col" colspan="9">餐桌列表</th>
             </tr>
             <tr class="text-c">
                 <th width="25"><input type="checkbox" name="" value=""></th>
-                <th width="100">顾客姓名</th>
-                <th width="150">用餐时间</th>
-                <th width="100">用餐人数</th>
+                <th width="100">餐桌号</th>
+                <th width="150">座位数</th>
                 <th width="100">当前状态</th>
-                <th width="100">备注</th>
-                <th width="100">类型</th>
-                <th width="100">创建时间</th>
                 <th width="100">最新更新时间</th>
                 <th width="100">操作</th>
             </tr>
@@ -87,7 +60,9 @@
 <script type="text/javascript" src="static/h-ui/js/H-ui.js"></script>
 <script type="text/javascript" src="static/h-ui.admin/js/H-ui.admin.js"></script>
 <script type="text/javascript" src="lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
-<script type="text/javascript" src="js/admin/reservation_list.js"></script>
+<script type="text/javascript" src="js/admin/choose_table.js"></script>
 <script type="text/javascript"></script>
 </body>
 </html>
+
+

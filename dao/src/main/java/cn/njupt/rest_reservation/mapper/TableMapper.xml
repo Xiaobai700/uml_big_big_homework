@@ -7,9 +7,10 @@
     <result column="table_status" property="tableStatus" jdbcType="INTEGER" />
     <result column="seats_number" property="seatsNumber" jdbcType="INTEGER" />
     <result column="table_no" property="tableNo" jdbcType="INTEGER" />
+    <result column="updateTime" property="updatetime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, staff_id, table_status, seats_number, table_no
+    id, staff_id, table_status, seats_number, table_no, updateTime
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -22,10 +23,12 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="cn.njupt.rest_reservation.model.Table" >
-    insert into r_table (id, staff_id, table_status,
-      seats_number, table_no)
+    insert into r_table (id, staff_id, table_status, 
+      seats_number, table_no, updateTime
+      )
     values (#{id,jdbcType=INTEGER}, #{staffId,jdbcType=INTEGER}, #{tableStatus,jdbcType=INTEGER}, 
-      #{seatsNumber,jdbcType=INTEGER}, #{tableNo,jdbcType=INTEGER})
+      #{seatsNumber,jdbcType=INTEGER}, #{tableNo,jdbcType=INTEGER}, #{updatetime,jdbcType=TIMESTAMP}
+      )
   </insert>
   <insert id="insertSelective" parameterType="cn.njupt.rest_reservation.model.Table" >
     insert into r_table
@@ -45,6 +48,9 @@
       <if test="tableNo != null" >
         table_no,
       </if>
+      <if test="updatetime != null" >
+        updateTime,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -61,6 +67,9 @@
       </if>
       <if test="tableNo != null" >
         #{tableNo,jdbcType=INTEGER},
+      </if>
+      <if test="updatetime != null" >
+        #{updatetime,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
@@ -79,6 +88,9 @@
       <if test="tableNo != null" >
         table_no = #{tableNo,jdbcType=INTEGER},
       </if>
+      <if test="updatetime != null" >
+        updateTime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -87,7 +99,8 @@
     set staff_id = #{staffId,jdbcType=INTEGER},
       table_status = #{tableStatus,jdbcType=INTEGER},
       seats_number = #{seatsNumber,jdbcType=INTEGER},
-      table_no = #{tableNo,jdbcType=INTEGER}
+      table_no = #{tableNo,jdbcType=INTEGER},
+      updateTime = #{updatetime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
   <select id="selectAllTable" resultMap="BaseResultMap" parameterType="java.util.HashMap">
@@ -97,6 +110,9 @@
     </if>
     <if test="tableStatus!=null and tableStatus!='-1'">
       and table_status = #{tableStatus,jdbcType=INTEGER}
+    </if>
+    <if test="seatsNumber != null and seatsNumber!=''">
+      AND seats_number &gt;= #{seatsNumber}
     </if>
     <if test="start != null">
       LIMIT #{start,jdbcType=INTEGER}, #{end,jdbcType=INTEGER};

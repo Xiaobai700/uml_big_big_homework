@@ -46,7 +46,6 @@
                 <th width="100">姓名</th>
                 <th width="150">联系电话</th>
                 <th width="100">性别</th>
-                <th width="100">操作</th>
             </tr>
             </thead>
         </table>

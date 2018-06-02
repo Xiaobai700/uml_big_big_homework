@@ -1,5 +1,7 @@
 package cn.njupt.rest_reservation.model;
 
+import java.util.Date;
+
 public class Table {
     private Integer id;
 
@@ -10,6 +12,8 @@ public class Table {
     private Integer seatsNumber;
 
     private Integer tableNo;
+
+    private Date updatetime;
 
     public Integer getId() {
         return id;
@@ -49,5 +53,13 @@ public class Table {
 
     public void setTableNo(Integer tableNo) {
         this.tableNo = tableNo;
+    }
+
+    public Date getUpdatetime() {
+        return updatetime;
+    }
+
+    public void setUpdatetime(Date updatetime) {
+        this.updatetime = updatetime;
     }
 }

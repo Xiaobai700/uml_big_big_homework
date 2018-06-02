@@ -155,6 +155,12 @@
     <if test="keys!=null and keys!='' ">
       AND table_id = #{keys}
     </if>
+    <if test="reservationStatus!=null and reservationStatus!='-2'">
+      and status = #{reservationStatus,jdbcType=INTEGER}
+    </if>
+    <if test="flag!=null and flag!='-1'">
+      and flag = #{flag,jdbcType=INTEGER}
+    </if>
     <if test="start != null">
       LIMIT #{start,jdbcType=INTEGER}, #{end,jdbcType=INTEGER};
     </if>
