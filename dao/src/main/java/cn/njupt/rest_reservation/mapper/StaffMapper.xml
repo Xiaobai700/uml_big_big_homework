@@ -114,5 +114,8 @@
   </select>
   <select id="selectAllStaff" resultMap="BaseResultMap" parameterType="java.util.HashMap">
     SELECT * FROM staff WHERE 1=1
+    <if test="keys != null and keys!=''">
+      AND job_number LIKE '%${keys}%'
+    </if>
   </select>
 </mapper>

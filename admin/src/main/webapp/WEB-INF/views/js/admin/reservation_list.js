@@ -5,15 +5,15 @@ jQuery(function(){
     $(document).ready(function(){
         $("table").dataTable({
             "oLanguage": {
-                "sProcessing" : "正在加载数据...",
-                "sLoadingRecords" : "正在加载数据...",
+                "sProcessing" : "店小二在拼命加载...",
+                "sLoadingRecords" : "店小二在拼命加载...",
                 "sLengthMenu" : "显示_MENU_条 ",
                 "sZeroRecords" : "没有您要搜索的内容",
                 "sInfo" : "显示 _START_ 到 _END_ ，共 _TOTAL_ 条",
                 "sInfoFiltered": "(共 _MAX_ 条)",
                 "sInfoEmpty" : "记录数为0",
                 "sInfoPostFix" : "",
-                "sSearch" : "管理员账号、备注搜索",
+                "sSearch" : "餐桌桌号搜索",
                 "sUrl" : "",
                 "oPaginate" : {
                     "sFirst" : "第一页",
@@ -30,6 +30,8 @@ jQuery(function(){
             "bServerSide": true,//这个用来指明是通过服务端来取数据
             "sAjaxSource": "reservation_list.json",//这个是请求的地址
             "fnServerData": retrieveData, // 获取数据的处理函数
+            "fnServerParams": function (aoData) {
+            },
             "aoColumns":[
                 { "mData": "id",'sClass':'center',"mRender": function(data, type, full) {
                     var returnStr="";
@@ -66,7 +68,9 @@ jQuery(function(){
                 }},
                 { "mData": "id",'sClass':'center',"mRender": function(data, type, full) {
                     var returnStr="";
-                    returnStr += '<i class="Hui-iconfont cursor-pointer" title="禁用" onClick="jinyong(\''+full["id"]+'\')">&#xe6e2;</i>';
+                    returnStr += '<i class="Hui-iconfont cursor-pointer" title="调换餐桌" onClick="transfer(\''+full["id"]+'\')" style="font-size: large;">&#xe647;</i>';
+                    returnStr += '&nbsp;&nbsp;<i class="Hui-iconfont cursor-pointer" title="取消" onClick="cancel(\''+full["id"]+'\')" style="color: red;font-size: large;">&#xe66b;</i>';
+                    returnStr += '&nbsp;&nbsp;<i class="Hui-iconfont cursor-pointer" title="记录到达" onClick="record_arrival(\''+full["id"]+'\')" style="font-size: large;">&#xe60c;</i>';
                     return returnStr;
                 }},
             ]
@@ -99,11 +103,11 @@ function retrieveData( sSource111,aoData111, fnCallback111) {
  h		弹出层高度（缺省调默认值）
  */
 /*管理员-增加*/
-function add_admin(title,url,w,h){
-    layer_show(title,url,w,h);
+function transfer() {
+
 }
 
-function jinyong() {
-
+function cancel() {
+    
 }
 

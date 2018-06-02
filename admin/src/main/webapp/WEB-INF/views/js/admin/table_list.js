@@ -1,9 +1,10 @@
 /**
  * Created by zhangqiao on 2018/6/1.
  */
+var table =""
 jQuery(function(){
     $(document).ready(function(){
-        $("table").dataTable({
+        table = $("table").dataTable({
             "oLanguage": {
                 "sProcessing" : "正在加载数据...",
                 "sLoadingRecords" : "正在加载数据...",
@@ -13,7 +14,7 @@ jQuery(function(){
                 "sInfoFiltered": "(共 _MAX_ 条)",
                 "sInfoEmpty" : "记录数为0",
                 "sInfoPostFix" : "",
-                "sSearch" : "管理员账号、备注搜索",
+                "sSearch" : "餐桌号搜索",
                 "sUrl" : "",
                 "oPaginate" : {
                     "sFirst" : "第一页",
@@ -26,10 +27,16 @@ jQuery(function(){
             "bDestroy": true,
             "bSort": false,
             "bStateSave": true,
-            "bProcessing": false, // 是否显示取数据时的那个等待提示
+            "bProcessing": true, // 是否显示取数据时的那个等待提示
             "bServerSide": true,//这个用来指明是通过服务端来取数据
             "sAjaxSource": "table_list.json",//这个是请求的地址
             "fnServerData": retrieveData, // 获取数据的处理函数
+            "fnServerParams": function (aoData) {
+                aoData.push({
+                        name: "tableStatus",
+                        value: $('#tableStatus option:selected').val()
+                    })
+            },
             "aoColumns":[
                 { "mData": "id",'sClass':'center',"mRender": function(data, type, full) {
                     var returnStr="";
@@ -51,8 +58,14 @@ jQuery(function(){
                     var returnStr="";
                     returnStr += '<i class="Hui-iconfont cursor-pointer" title="禁用" onClick="jinyong(\''+full["id"]+'\')">&#xe6e2;</i>';
                     return returnStr;
-                }},
+                }}
             ]
+        });
+        $("#tableStatus").change(function () {
+            var tableStatus = $('#tableStatus option:selected').val();
+            if (tableStatus != null && tableStatus !="") {
+                table.fnDraw();
+            }
         });
     });
 });
@@ -72,20 +85,6 @@ function retrieveData( sSource111,aoData111, fnCallback111) {
         }
     });
 }
-
-/*
- 参数解释：
- title	标题
- url		请求的url
- id		需要操作的数据id
- w		弹出层宽度（缺省调默认值）
- h		弹出层高度（缺省调默认值）
- */
-/*管理员-增加*/
-function add_admin(title,url,w,h){
-    layer_show(title,url,w,h);
-}
-
 function jinyong() {
 
 }

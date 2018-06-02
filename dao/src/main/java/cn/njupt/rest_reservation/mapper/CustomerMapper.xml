@@ -105,5 +105,8 @@
   </update>
   <select id="selectAllCustomer" resultMap="BaseResultMap" parameterType="java.util.HashMap">
     SELECT * FROM customer WHERE 1=1
+    <if test="keys != null and keys!=''">
+      AND phone LIKE '%${keys}%'
+    </if>
   </select>
 </mapper>

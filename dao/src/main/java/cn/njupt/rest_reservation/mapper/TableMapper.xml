@@ -92,5 +92,17 @@
   </update>
   <select id="selectAllTable" resultMap="BaseResultMap" parameterType="java.util.HashMap">
     SELECT * FROM r_table WHERE 1=1
+    <if test="keys != null and keys!=''">
+      AND table_no = #{keys}
+    </if>
+    <if test="tableStatus!=null and tableStatus!='-1'">
+      and table_status = #{tableStatus,jdbcType=INTEGER}
+    </if>
+    <if test="start != null">
+      LIMIT #{start,jdbcType=INTEGER}, #{end,jdbcType=INTEGER};
+    </if>
+    <if test="index != null">
+      LIMIT #{index,jdbcType=INTEGER}, #{size,jdbcType=INTEGER};
+    </if>
   </select>
 </mapper>

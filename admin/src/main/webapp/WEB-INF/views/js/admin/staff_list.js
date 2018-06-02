@@ -13,7 +13,7 @@ jQuery(function(){
                 "sInfoFiltered": "(共 _MAX_ 条)",
                 "sInfoEmpty" : "记录数为0",
                 "sInfoPostFix" : "",
-                "sSearch" : "管理员账号、备注搜索",
+                "sSearch" : "员工工号搜索",
                 "sUrl" : "",
                 "oPaginate" : {
                     "sFirst" : "第一页",

@@ -31,9 +31,9 @@ public class DateTableUtil {
                         requestMap.put("sortId", jsonObject.get("value").toString());
                     }
                 }
-                else if (jsonObject.get("name").equals("CityName")) {
-                    if (!jsonObject.get("value").toString().equals("0")) {
-                        requestMap.put("CityName", jsonObject.get("value").toString());
+                else if (jsonObject.get("name").equals("tableStatus")) {
+                    if (!jsonObject.get("value").toString().equals("-1")) {
+                        requestMap.put("tableStatus", jsonObject.get("value").toString());
                     }
                 }
 
@@ -50,63 +50,6 @@ public class DateTableUtil {
                         requestMap.put("startTime", jsonObject.get("value").toString());
                     }
 
-                }
-                else if (jsonObject.get("name").equals("eventType")) {
-                    if (!jsonObject.get("value").toString().equals("0")) {
-                        requestMap.put("eventType", jsonObject.get("value").toString());
-                    }
-
-                }
-
-
-
-                else if (jsonObject.get("name").equals("endTime")) {
-                    if (!jsonObject.get("value").toString().equals("0")) {
-                        requestMap.put("endTime", jsonObject.get("value").toString());
-                    }
-
-                }
-
-
-                else if (jsonObject.get("name").equals("modelId")) {
-                    if (!jsonObject.get("value").toString().equals("0")) {
-                        requestMap.put("modelId", jsonObject.get("value").toString());
-                    }
-                }
-                else if (jsonObject.get("name").equals("typeId")) {
-                    if (!jsonObject.get("value").toString().equals("0")) {
-                        requestMap.put("typeId", jsonObject.get("value").toString());
-                    }
-                }
-                else if (jsonObject.get("name").equals("identity")) {
-                    if (!jsonObject.get("value").toString().equals("-1")) {
-                        requestMap.put("identity", jsonObject.get("value").toString());
-                    }
-                }
-                else if (jsonObject.get("name").equals("industry")) {
-                    if (!jsonObject.get("value").toString().equals("0")) {
-                        requestMap.put("industry", jsonObject.get("value").toString());
-                    }
-                }
-                else if (jsonObject.get("name").equals("resultId")) {
-                    if (!jsonObject.get("value").toString().equals("0")) {
-                        requestMap.put("resultId", jsonObject.get("value").toString());
-                    }
-                }
-                else if (jsonObject.get("name").equals("typeId")) {
-                    if (!jsonObject.get("value").toString().equals("0")) {
-                        requestMap.put("typeId", jsonObject.get("value").toString());
-                    }
-                }
-                else if (jsonObject.get("name").equals("enterpriseId")) {
-                    if (!jsonObject.get("value").toString().equals("0")) {
-                        requestMap.put("enterpriseId", jsonObject.get("value").toString());
-                    }
-                }
-                else if (jsonObject.get("name").equals("isChecked")) {
-                    if (!jsonObject.get("value").toString().equals("-1")&&!jsonObject.get("value").toString().equals("")) {
-                        requestMap.put("isChecked", jsonObject.get("value").toString());
-                    }
                 }
                 else if (jsonObject.get("name").equals("phone")) {
                     if (!jsonObject.get("value").toString().equals("-1")&&!jsonObject.get("value").toString().equals("")) {

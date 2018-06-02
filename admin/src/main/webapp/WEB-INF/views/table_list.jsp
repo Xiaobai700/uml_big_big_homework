@@ -34,6 +34,15 @@
 </head>
 <body>
 <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 餐桌管理 <span class="c-gray en">&gt;</span> 餐桌列表 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+<div style="width: 120px;background-color: #5a98de;">
+    <span class="select-box">
+      <select class="select" id="tableStatus" size="1" name="demo1">
+        <option value="-1" selected>选择餐桌状态</option>
+        <option value="1">可用</option>
+        <option value="0">不可用</option>
+      </select>
+    </span>
+</div>
 <div class="page-c。ontainer">
     <div class="cl pd-5 bg-1 bk-gray mt-20">
         <table class="table table-border table-bordered table-bg">

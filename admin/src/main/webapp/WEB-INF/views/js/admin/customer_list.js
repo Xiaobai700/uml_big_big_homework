@@ -13,7 +13,7 @@ jQuery(function(){
                 "sInfoFiltered": "(共 _MAX_ 条)",
                 "sInfoEmpty" : "记录数为0",
                 "sInfoPostFix" : "",
-                "sSearch" : "管理员账号、备注搜索",
+                "sSearch" : "顾客电话号码搜索",
                 "sUrl" : "",
                 "oPaginate" : {
                     "sFirst" : "第一页",
@@ -47,11 +47,6 @@ jQuery(function(){
                     }
                     return returnStr;
                 }},
-                { "mData": "id",'sClass':'center',"mRender": function(data, type, full) {
-                    var returnStr="";
-                    returnStr += '<i class="Hui-iconfont cursor-pointer" title="禁用" onClick="jinyong(\''+full["id"]+'\')">&#xe6e2;</i>';
-                    return returnStr;
-                }},
             ]
         });
     });
@@ -71,21 +66,4 @@ function retrieveData( sSource111,aoData111, fnCallback111) {
         error : function(msg) {
         }
     });
-}
-
-/*
- 参数解释：
- title	标题
- url		请求的url
- id		需要操作的数据id
- w		弹出层宽度（缺省调默认值）
- h		弹出层高度（缺省调默认值）
- */
-/*管理员-增加*/
-function add_admin(title,url,w,h){
-    layer_show(title,url,w,h);
-}
-
-function jinyong() {
-
 }
