@@ -10,4 +10,6 @@ import java.util.Map;
 @Component
 public interface CustomerService {
     Map queryAllCustomer(Map map);
+
+    Map login(String account,String password);
 }

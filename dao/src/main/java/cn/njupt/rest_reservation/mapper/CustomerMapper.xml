@@ -109,4 +109,13 @@
       AND phone LIKE '%${keys}%'
     </if>
   </select>
+  <select id="selectCustomer" resultMap="BaseResultMap" parameterType="cn.njupt.rest_reservation.model.Customer">
+    SELECT * FROM customer WHERE 1=1
+    <if test="phone != null">
+      AND phone = #{phone}
+    </if>
+    <if test="password != null">
+      AND password = #{password}
+    </if>
+  </select>
 </mapper>

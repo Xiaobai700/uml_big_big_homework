@@ -43,4 +43,20 @@ public class CustomerServiceImpl implements CustomerService {
         }
         return returnMap;
     }
+
+    @Override
+    public Map login(String account,String password) {
+        Map returnMap = new HashMap();
+        try{
+            Customer customer = new Customer();
+            customer.setPhone(account);
+            customer.setPassword(password);
+            customer = customerMapper.selectCustomer(customer);
+            returnMap.put("customer",customer);
+            returnMap.put(ParameterConstant.RETURN_CODE,0);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return  returnMap;
+    }
 }

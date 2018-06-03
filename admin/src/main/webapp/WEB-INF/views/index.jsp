@@ -136,20 +136,5 @@
 <script type="text/javascript" src="lib/laypage/1.2/laypage.js"></script>
 <script type="text/javascript" src="static/h-ui/js/H-ui.js"></script>
 <script type="text/javascript" src="static/h-ui.admin/js/H-ui.admin.js"></script>
-<script type="text/javascript">
-    /*频道添加*/
-    function add_channel(title,url,w,h){
-        layer_show(title,url,w,h);
-    }
-    /*管理员-增加*/
-    function add_admin(title,url,w,h){
-        layer_show(title,url,w,h);
-    }
-    /*新闻添加*/
-    function add_news(title,url,w,h){
-        layer_show(title,url,w,h);
-    }
-
-</script>
 </body>
 </html>

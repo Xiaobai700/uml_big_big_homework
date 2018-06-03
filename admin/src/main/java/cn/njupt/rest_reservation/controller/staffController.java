@@ -31,7 +31,7 @@ public class staffController {
     /*登陆验证*/
     @ResponseBody
     @RequestMapping(value="loginCheck.json")
-    public  void  loginCheck(HttpSession session,
+    public void loginCheck(HttpSession session,
                              HttpServletRequest request,
                              HttpServletResponse response,
                              String account,
