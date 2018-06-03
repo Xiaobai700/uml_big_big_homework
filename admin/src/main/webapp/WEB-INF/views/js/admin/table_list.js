@@ -48,9 +48,9 @@ jQuery(function(){
                 { "mData": "tableStatus",'sClass':'center',"mRender": function(data, type, full) {
                     var returnStr="";
                     if(full["tableStatus"]==0){
-                        returnStr +="可用";
+                        returnStr +="未被预约";
                     }else{
-                        returnStr +="不可用";
+                        returnStr +=full["tableStatus"]+"个预约";
                     }
                     return returnStr;
                 }},

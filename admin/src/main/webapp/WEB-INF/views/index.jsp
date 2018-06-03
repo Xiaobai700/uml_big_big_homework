@@ -43,8 +43,6 @@
                     <li>超级管理员</li>
                     <li class="dropDown dropDown_hover"> <a href="#" class="dropDown_A">${adminName}<i class="Hui-iconfont">&#xe6d5;</i></a>
                         <ul class="dropDown-menu menu radius box-shadow">
-                            <li><a href="#">个人信息</a></li>
-                            <li><a href="#">切换账户</a></li>
                             <li><a href="login_out.html">退出</a></li>
                         </ul>
                     </li>

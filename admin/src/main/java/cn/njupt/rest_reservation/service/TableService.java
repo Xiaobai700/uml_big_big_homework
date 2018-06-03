@@ -10,4 +10,6 @@ import java.util.Map;
 @Component
 public interface TableService {
     Map queryAllTable(Map map);
+
+    Map selectChooseTable(Map map);
 }

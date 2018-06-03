@@ -87,15 +87,14 @@ jQuery(function(){
                 { "mData": "id",'sClass':'center',"mRender": function(data, type, full) {
                     var returnStr="";
                     if(full["status"] != -1 && full["status"] != 3){
+                        returnStr += '<i class="Hui-iconfont cursor-pointer" title="调换餐桌" onClick="transfer(\''+full["id"]+'\')" style="font-size: large;">&#xe647;</i>';
                         if(full["status"] == 0){
-                            returnStr += '<i class="Hui-iconfont cursor-pointer" title="调换餐桌" onClick="transfer(\''+full["id"]+'\')" style="font-size: large;">&#xe647;</i>';
                             returnStr += '&nbsp;&nbsp;<i class="Hui-iconfont cursor-pointer" title="记录到达" onClick="record_arrival(\''+full["id"]+'\')" style="font-size: large;">&#xe60c;</i>';
+                            returnStr += '&nbsp;&nbsp;<i class="Hui-iconfont cursor-pointer" title="取消" onClick="cancel(\''+full["id"]+'\')" style="color: red;font-size: large;">&#xe66b;</i>';
                         }else if(full["status"] == 1){
-                            returnStr += '<i class="Hui-iconfont cursor-pointer" title="调换餐桌" onClick="transfer(\''+full["id"]+'\')" style="font-size: large;">&#xe647;</i>';
                             returnStr += '&nbsp;&nbsp;<i class="Hui-iconfont cursor-pointer" title="取消" onClick="cancel(\''+full["id"]+'\')" style="color: red;font-size: large;">&#xe66b;</i>';
                             returnStr += '&nbsp;&nbsp;<i class="Hui-iconfont cursor-pointer" title="用餐结束" onClick="end_meal(\''+full["id"]+'\')" style="color: blue;font-size: large;">&#xe6e1;</i>';
                         }else if(full["status"] == 2){
-                            returnStr += '<i class="Hui-iconfont cursor-pointer" title="调换餐桌" onClick="transfer(\''+full["id"]+'\',)" style="font-size: large;">&#xe647;</i>';
                             returnStr += '&nbsp;&nbsp;<i class="Hui-iconfont cursor-pointer" title="记录到达" onClick="record_arrival(\''+full["id"]+'\')" style="font-size: large;">&#xe60c;</i>';
                             returnStr += '&nbsp;&nbsp;<i class="Hui-iconfont cursor-pointer" title="取消" onClick="cancel(\''+full["id"]+'\')" style="color: red;font-size: large;">&#xe66b;</i>';
                         }

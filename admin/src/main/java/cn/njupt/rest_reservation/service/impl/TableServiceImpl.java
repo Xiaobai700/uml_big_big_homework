@@ -43,4 +43,27 @@ public class TableServiceImpl implements TableService {
         }
         return returnMap;
     }
+
+    @Override
+    public Map selectChooseTable(Map map) {
+        Map returnMap = new HashMap();
+        try{
+            List<Table> tables = tableMapper.selectChoose(map);
+            List<Table> list = new ArrayList<>();
+            for (Table table:tables) {
+                list.add(table);
+            }
+
+            returnMap = ResponseConstant.getResponsecodeDesc(0);
+            returnMap.put(ParameterConstant.RETURN_DATA,list);
+            map.remove(ParameterConstant.INDEX);
+            map.remove(ParameterConstant.LENGTH);
+            returnMap.put(ParameterConstant.DATA_ITOTALDISPLAYRECORDS,tableMapper.selectChoose(map).size());
+            returnMap.put(ParameterConstant.DATA_ITOTALRECORDS,tableMapper.selectChoose(map).size());
+            return returnMap;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return returnMap;
+    }
 }

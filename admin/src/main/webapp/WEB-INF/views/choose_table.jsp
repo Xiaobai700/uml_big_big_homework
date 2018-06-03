@@ -46,7 +46,7 @@
                 <th width="100">餐桌号</th>
                 <th width="150">座位数</th>
                 <th width="100">当前状态</th>
-                <th width="100">最新更新时间</th>
+                <%--<th width="100">最新更新时间</th>--%>
                 <th width="100">操作</th>
             </tr>
             </thead>

@@ -121,4 +121,13 @@
       LIMIT #{index,jdbcType=INTEGER}, #{size,jdbcType=INTEGER};
     </if>
   </select>
+  <select id="selectChoose" resultMap="BaseResultMap" parameterType="java.util.HashMap">
+    SELECT * from r_table left join reservation on r_table.id = reservation.table_id WHERE (reservation.`meal_time` &lt;
+    (SELECT DATE_SUB((SELECT meal_time from reservation where id = #{reservationId}),INTERVAL 2 HOUR))
+    OR reservation.`meal_time` &gt; (SELECT DATE_ADD((SELECT meal_time from reservation where id = #{reservationId}),INTERVAL 2 HOUR))
+    OR r_table.table_status = 0)
+    <if test="seatsNumber != null and seatsNumber!=''">
+      AND seats_number &gt;= #{seatsNumber}
+    </if>
+  </select>
 </mapper>

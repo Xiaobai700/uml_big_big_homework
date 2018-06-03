@@ -73,8 +73,8 @@ public class ReservationServiceImpl implements ReservationService {
     /**调换餐桌
      1.修改当前预约的状态
      2.当前预约的备注信息为调换后的餐桌号
-     3.修改原餐桌的状态为可用
-     4.修改新餐桌的状态为不可用
+     3.修改原餐桌的状态为可用    此处修改：把原来餐桌被预约次数-1（如果大于0的话）
+     4.修改新餐桌的状态为不可用   此处修改： 把新餐桌被预约次数+1 餐桌表的table_status字段意思是被预约的次数
      */
     @Override
     public Map transfer_reservation(Map map) {
@@ -100,7 +100,11 @@ public class ReservationServiceImpl implements ReservationService {
                 }
                 Table table = tableMapper.selectByPrimaryKey(tableId);
                 if(table != null){
-                    table.setTableStatus(TableStatus.USABLE.getStatus());
+                    // TODO: 2018/6/3  餐桌表的table_status字段意思是被预约的次数 用次数的减来表示释放
+                    if(table.getTableStatus()>0){
+                        table.setTableStatus(table.getTableStatus()-1);
+                    }
+                   // table.setTableStatus(TableStatus.USABLE.getStatus());
                     table.setUpdatetime(new Date());
 
                     tableMapper.updateByPrimaryKey(table);
@@ -110,7 +114,9 @@ public class ReservationServiceImpl implements ReservationService {
                 Table newTable = tableMapper.selectByPrimaryKey(Integer.parseInt(newTableId));
                 if (newTable != null){
                     if(newTable.getTableStatus().equals(TableStatus.USABLE.getStatus())){
-                        newTable.setTableStatus(TableStatus.UNUSABLE.getStatus());
+                        // TODO: 2018/6/3  餐桌表的table_status字段意思是被预约的次数 用次数的增占用
+                        newTable.setTableStatus(newTable.getTableStatus()+1);
+                        //newTable.setTableStatus(TableStatus.UNUSABLE.getStatus());
                         newTable.setUpdatetime(new Date());
 
                         tableMapper.updateByPrimaryKey(newTable);
@@ -143,7 +149,11 @@ public class ReservationServiceImpl implements ReservationService {
                 reservationMapper.updateByPrimaryKey(reservation);
                 Table table = tableMapper.selectByPrimaryKey(tableId);
                 if(table != null){
-                    table.setTableStatus(TableStatus.USABLE.getStatus());
+                    // TODO: 2018/6/3  餐桌表的table_status字段意思是被预约的次数 用次数的减来表示释放
+                    if(table.getTableStatus()>0){
+                        table.setTableStatus(table.getTableStatus()-1);
+                    }
+                   // table.setTableStatus(TableStatus.USABLE.getStatus());
                     table.setUpdatetime(new Date());
 
                     tableMapper.updateByPrimaryKey(table);
@@ -205,7 +215,11 @@ public class ReservationServiceImpl implements ReservationService {
                     theTabeId = Integer.parseInt(remark);
                 }
                 Table table = tableMapper.selectByPrimaryKey(theTabeId);
-                table.setTableStatus(0);
+                //table.setTableStatus(0);
+                // TODO: 2018/6/3  餐桌表的table_status字段意思是被预约的次数 用次数的减来表示释放
+                if(table.getTableStatus()>0){
+                    table.setTableStatus(table.getTableStatus()-1);
+                }
                 table.setUpdatetime(new Date());
                 tableMapper.updateByPrimaryKey(table);
                 returnMap.put(ParameterConstant.RETURN_CODE,0);

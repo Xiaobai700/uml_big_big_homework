@@ -19,4 +19,6 @@ public interface TableMapper {
     int updateByPrimaryKey(Table record);
 
     List<Table> selectAllTable(Map map);
+
+    List<Table> selectChoose(Map map);
 }

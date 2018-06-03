@@ -92,9 +92,10 @@ function retrieveData( sSource111,aoData111, fnCallback111) {
  */
 /*管理员-增加*/
 function add_admin(title,url,w,h){
-    layer_show(title,url,w,h);
+   // layer_show(title,url,w,h);
+    layer.msg("添加员工功能还未开放", {icon: 5, time: 1000});
 }
 
 function jinyong() {
-    
+    layer.msg("禁用员工功能还未开放", {icon: 5, time: 1000});
 }

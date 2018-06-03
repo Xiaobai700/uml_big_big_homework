@@ -57,7 +57,7 @@ jQuery(function(){
                     }
                     return returnStr;
                 }},
-                { "mData": "updatetime",'sClass':'center'},
+                // { "mData": "updatetime",'sClass':'center'},
                 { "mData": "id",'sClass':'center',"mRender": function(data, type, full) {
                     var returnStr="";
                     returnStr += '<i class="Hui-iconfont cursor-pointer" title="选择" style="font-size: large;" onClick="choose(\''+full["id"]+'\')">&#xe617;</i>';

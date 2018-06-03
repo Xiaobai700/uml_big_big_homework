@@ -73,7 +73,8 @@ public class TableController {
             }
             Reservation reservation =reservationMapper.selectByPrimaryKey(reservationId);
             requestMap.put("seatsNumber",reservation.getTablewareNumber());
-            returnMap =tableService.queryAllTable(requestMap);
+            requestMap.put("reservationId",reservationId);
+            returnMap =tableService.selectChooseTable(requestMap);
             System.out.println("returnMap:"+returnMap);
             outWriter.write(mapper.writeValueAsString(returnMap));
         }catch (Exception e){
