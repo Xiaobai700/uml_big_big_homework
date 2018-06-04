@@ -69,13 +69,18 @@ public class CustomerController {
             returnMap = customerService.login(account,password);
             if(String.valueOf(returnMap.get(ParameterConstant.RETURN_CODE)).equals("0")){
                 Customer customer = (Customer)returnMap.get("customer");
+                Integer id = customer.getId();
+                returnMap.put("userId",id);
                 request.getSession().setAttribute("account",account);
-                request.getSession().setAttribute("userId",customer.getId());
+                request.getSession().setAttribute("userId",id);
+//                HttpSession session1 = MySessionContext.getSession(sessionId);
+                outWriter.write(mapper.writeValueAsString(returnMap));
             }
-            outWriter.write(mapper.writeValueAsString(returnMap));
+
         }catch (Exception e){
             returnMap = ResponseConstant.getOneResponseMsg("登录失败");
             outWriter.write(mapper.writeValueAsString(returnMap));
+            e.printStackTrace();
         }
     }
 

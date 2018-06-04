@@ -29,14 +29,15 @@
     <style type="text/css">
         body{font-size:14px}
 
-        .header,.footer{ position:absolute; left:0; right:0; width:100%; z-index:99}
+        .header,.footer{ position:absolute; left:0; right:0; width:100%;
+            height:80px; z-index:99}
         .header{
             color: white;
             text-align: center;
-            margin-top: -18px;
+
         }
 
-        .loginWraper{ position:absolute;width:100%; left:0; top:0; bottom:0; right:0; z-index:1; background:#3283AC url(img/3.jpg) no-repeat center}
+        .loginWraper{ position:absolute;width:100%; left:0; top:0; bottom:0; right:0; z-index:1; background: url(img/3.jpg) no-repeat center}
         .loginBox{ position:absolute; width:617px; height:330px; background:url(img/login_bg.png) no-repeat; left:50%; top:50%; margin-left:-309px; margin-top:-184px; padding-top:38px}
         @media (max-width:617px) {
             .loginbox{ width:100%; position:static; margin-top:0; margin-left:0;}
@@ -47,12 +48,12 @@
         @media (max-width:617px) {
             .loginBox .input-text{ width:80%}
         }
-        .yzm a{ color:#426374; font-size:12px}
+        .yzm a{  font-size:12px}
 
         .hd_msg a{ color:#fff}
         .hd_msg a:hover{ color:#fff; text-decoration:underline}
 
-        .footer{ height:46px; line-height:46px; bottom:0; text-align:center; color:#fff; font-size:12px; background-color:#426374}
+        .footer{ height:46px; line-height:46px; bottom:2px; text-align:center; color:#fff; font-size:12px; }
 
         #ie6-warning a {text-decoration:none}
     </style>

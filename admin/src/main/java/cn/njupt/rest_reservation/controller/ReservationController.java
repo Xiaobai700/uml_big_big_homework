@@ -9,7 +9,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
@@ -141,6 +143,40 @@ public class ReservationController {
         }catch (Exception e){
             e.printStackTrace();
             outWriter.write(mapper.writeValueAsString(returnMap));
+        }
+        return;
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "add_Reservation.json")
+    public void add_reservation(HttpServletResponse response,
+                                HttpServletRequest request,
+                                HttpSession session,
+                                     String token,
+                                     Integer tablewareNumber,
+                                     String mealTime,
+                                     Integer flag
+                                     )throws  Exception{
+        response.setContentType("application/json;charset=UTF-8");
+        PrintWriter outWriter = response.getWriter();
+        ObjectMapper mapper = new ObjectMapper();
+        SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        mapper.setDateFormat(fmt);
+
+        Map returnMap = new HashMap();
+        try {
+            Map requestMap = new HashMap();
+            Integer userId =Integer.parseInt(token);
+            requestMap.put("userId",userId);
+            requestMap.put("tablewareNumber",tablewareNumber);
+            requestMap.put("flag",flag);
+            requestMap.put("mealTime",mealTime);
+            returnMap =reservationService.addReservation(requestMap);
+            System.out.println("returnMap:"+returnMap);
+            outWriter.write(mapper.writeValueAsString(returnMap));
+        }catch (Exception e){
+            outWriter.write(mapper.writeValueAsString(returnMap));
+            e.printStackTrace();
         }
         return;
     }

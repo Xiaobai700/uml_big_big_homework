@@ -18,4 +18,6 @@ public interface ReservationService {
     Map record_arrival(Map map);
 
     Map end_meal(Map map);
+
+    Map addReservation(Map map);
 }

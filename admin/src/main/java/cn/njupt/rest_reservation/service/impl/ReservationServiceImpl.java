@@ -14,6 +14,7 @@ import cn.njupt.rest_reservation.service.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
@@ -230,6 +231,35 @@ public class ReservationServiceImpl implements ReservationService {
 
         }catch (Exception e){
             e.printStackTrace();
+        }
+        return returnMap;
+    }
+
+    @Override
+    public Map addReservation(Map map) {
+        Map returnMap = new HashMap();
+        try{
+            Integer userId = Integer.parseInt(map.get("userId").toString());
+            String tablewareNumber = map.get("tablewareNumber").toString();
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            Integer flag = Integer.parseInt(map.get("flag").toString());
+            Reservation reservation = new Reservation();
+            reservation.setStatus(0);
+            reservation.setCreateTime(new Date());
+            reservation.setUpdateTime(new Date());
+            reservation.setFlag(flag);
+            reservation.setMealTime(sdf.parse(map.get("mealTime").toString()));
+            reservation.setRemarks("");
+            // TODO: 2018/6/4  /*tableid自动分配*/
+            reservation.setTableId(1);
+            reservation.setUserId(userId);
+            reservation.setTablewareNumber(Integer.parseInt(tablewareNumber));
+            reservationMapper.insertSelective(reservation);
+            returnMap.put(ParameterConstant.RETURN_CODE,0);
+            returnMap.put(ParameterConstant.RETURN_MSG,"预约成功啦！请准时到店哦");
+        }catch (Exception e){
+            e.printStackTrace();
+            returnMap.put(ParameterConstant.RETURN_MSG,"哎呀，系统异常");
         }
         return returnMap;
     }

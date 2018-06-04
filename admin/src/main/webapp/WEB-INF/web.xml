@@ -17,6 +17,9 @@
   <!--<welcome-file-list>
     <welcome-file>/login.jsp</welcome-file>
   </welcome-file-list>-->
+  <listener>
+    <listener-class>cn.njupt.rest_reservation.controller.MySessionListener</listener-class>
+  </listener>
   <filter>
     <filter-name>encodingFilter</filter-name>
     <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
