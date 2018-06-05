@@ -6,7 +6,6 @@ import cn.njupt.rest_reservation.dao.CustomerMapper;
 import cn.njupt.rest_reservation.dao.ReservationMapper;
 import cn.njupt.rest_reservation.dao.TableMapper;
 import cn.njupt.rest_reservation.enums.ReservationStatus;
-import cn.njupt.rest_reservation.enums.TableStatus;
 import cn.njupt.rest_reservation.model.Customer;
 import cn.njupt.rest_reservation.model.Reservation;
 import cn.njupt.rest_reservation.model.Table;
@@ -114,7 +113,7 @@ public class ReservationServiceImpl implements ReservationService {
                 }
                 Table newTable = tableMapper.selectByPrimaryKey(Integer.parseInt(newTableId));
                 if (newTable != null){
-                    if(newTable.getTableStatus().equals(TableStatus.USABLE.getStatus())){
+                    //if(newTable.getTableStatus().equals(TableStatus.USABLE.getStatus())){
                         // TODO: 2018/6/3  餐桌表的table_status字段意思是被预约的次数 用次数的增占用
                         newTable.setTableStatus(newTable.getTableStatus()+1);
                         //newTable.setTableStatus(TableStatus.UNUSABLE.getStatus());
@@ -123,9 +122,9 @@ public class ReservationServiceImpl implements ReservationService {
                         tableMapper.updateByPrimaryKey(newTable);
                         returnMap.put(ParameterConstant.RETURN_CODE,0);
                         returnMap.put(ParameterConstant.RETURN_MSG,"调换成功！");
-                    }else {
-                        returnMap.put(ParameterConstant.RETURN_MSG,"所选新餐桌已被占用不可调换");
-                    }
+                   // }else {
+                    //    returnMap.put(ParameterConstant.RETURN_MSG,"所选新餐桌已被占用不可调换");
+                   // }
                 }else {
                     returnMap.put(ParameterConstant.RETURN_MSG,"所选新餐桌不存在");
                 }
@@ -248,13 +247,40 @@ public class ReservationServiceImpl implements ReservationService {
             reservation.setCreateTime(new Date());
             reservation.setUpdateTime(new Date());
             reservation.setFlag(flag);
-            reservation.setMealTime(sdf.parse(map.get("mealTime").toString()));
+            if(flag == 1){
+                reservation.setMealTime(new Date());
+            }else {
+                reservation.setMealTime(sdf.parse(map.get("mealTime").toString()));
+            }
             reservation.setRemarks("");
             // TODO: 2018/6/4  /*tableid自动分配*/
-            reservation.setTableId(1);
+            Map requestMap = new HashMap();
+            if(flag == 0){
+                requestMap.put("mealTime",sdf.parse(map.get("mealTime").toString()));
+            }
+            requestMap.put("seatsNumber",tablewareNumber);
+            List<Table> tableList = tableMapper.selectChoose(requestMap);
+            Integer tableid = 0;
+            if(tableList.size()>0){
+                tableid = tableList.get(0).getId();
+                reservation.setTableId(tableid);
+            }else {
+                returnMap.put(ParameterConstant.RETURN_MSG,"当前客满！稍后再试！");
+            }
             reservation.setUserId(userId);
             reservation.setTablewareNumber(Integer.parseInt(tablewareNumber));
             reservationMapper.insertSelective(reservation);
+            //设置餐桌状态
+            Table table = tableMapper.selectByPrimaryKey(tableid);
+            if (table != null){
+                table.setTableStatus(table.getTableStatus()+1);
+                table.setUpdatetime(new Date());
+                tableMapper.updateByPrimaryKey(table);
+            }else {
+                returnMap.put(ParameterConstant.RETURN_MSG,"所选新餐桌不存在");
+            }
+
+            returnMap.put("tableid",tableid);
             returnMap.put(ParameterConstant.RETURN_CODE,0);
             returnMap.put(ParameterConstant.RETURN_MSG,"预约成功啦！请准时到店哦");
         }catch (Exception e){

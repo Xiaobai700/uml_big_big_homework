@@ -38,8 +38,8 @@
     <span class="select-box">
       <select class="select" id="tableStatus" size="1" name="demo1">
         <option value="-1" selected>选择餐桌状态</option>
-        <option value="0">可用</option>
-        <option value="1">不可用</option>
+        <option value="0">未有预约</option>
+        <option value="1">已被预约</option>
       </select>
     </span>
 </div>
@@ -52,9 +52,10 @@
             </tr>
             <tr class="text-c">
                 <th width="25"><input type="checkbox" name="" value=""></th>
-                <th width="100">餐桌号</th>
+                <th width="150">餐桌号</th>
                 <th width="150">座位数</th>
-                <th width="100">当前状态</th>
+                <th width="150">当前状态</th>
+                <th width="150">预约时间</th>
                 <th width="100">最新更新时间</th>
                 <th width="100">操作</th>
             </tr>

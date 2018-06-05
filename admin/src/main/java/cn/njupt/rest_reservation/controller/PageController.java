@@ -60,4 +60,10 @@ public class PageController {
         return modelAndView;
     }
 
+    @RequestMapping(value = "add_walkIn.html")
+    public ModelAndView add_walk_in()throws Exception{
+        ModelAndView modelAndView = new ModelAndView("walk_in");
+        return modelAndView;
+    }
+
 }

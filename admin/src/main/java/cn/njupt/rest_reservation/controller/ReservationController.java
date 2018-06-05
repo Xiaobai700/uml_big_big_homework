@@ -166,11 +166,21 @@ public class ReservationController {
         Map returnMap = new HashMap();
         try {
             Map requestMap = new HashMap();
-            Integer userId =Integer.parseInt(token);
-            requestMap.put("userId",userId);
-            requestMap.put("tablewareNumber",tablewareNumber);
-            requestMap.put("flag",flag);
-            requestMap.put("mealTime",mealTime);
+            switch (flag){
+                case 0 :
+                    Integer userId =Integer.parseInt(token);
+                    requestMap.put("userId",userId);
+                    requestMap.put("tablewareNumber",tablewareNumber);
+                    requestMap.put("flag",flag);
+                    requestMap.put("mealTime",mealTime);
+                    break;
+                case 1:
+                    requestMap.put("userId",0);
+                    requestMap.put("tablewareNumber",tablewareNumber);
+                    requestMap.put("flag",flag);
+                    requestMap.put("mealTime",mealTime);
+                    break;
+            }
             returnMap =reservationService.addReservation(requestMap);
             System.out.println("returnMap:"+returnMap);
             outWriter.write(mapper.writeValueAsString(returnMap));

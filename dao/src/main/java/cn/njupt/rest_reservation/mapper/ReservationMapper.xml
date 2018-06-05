@@ -155,6 +155,10 @@
     <if test="keys!=null and keys!='' ">
       AND table_id = #{keys}
     </if>
+    <if test="tableId!=null and tableId!='' ">
+      AND status = 2 AND remarks = #{tableId} OR
+      status != -1 and status != 3 and status != 2 and table_id = #{tableId}
+    </if>
     <if test="reservationStatus!=null and reservationStatus!='-2'">
       and status = #{reservationStatus,jdbcType=INTEGER}
     </if>

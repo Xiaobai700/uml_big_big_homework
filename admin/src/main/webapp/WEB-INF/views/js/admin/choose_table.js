@@ -51,9 +51,9 @@ jQuery(function(){
                 { "mData": "tableStatus",'sClass':'center',"mRender": function(data, type, full) {
                     var returnStr="";
                     if(full["tableStatus"]==0){
-                        returnStr +="可用";
+                        returnStr +="还未有预约";
                     }else{
-                        returnStr +="不可用";
+                        returnStr +=full["detailTime"]
                     }
                     return returnStr;
                 }},

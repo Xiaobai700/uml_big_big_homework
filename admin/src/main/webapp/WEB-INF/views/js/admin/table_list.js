@@ -54,7 +54,8 @@ jQuery(function(){
                     }
                     return returnStr;
                 }},
-                { "mData": "updatetime",'sClass':'center'},
+                { "mData": "detailTime",'sClass':'center'},
+                { "mData": "updateTime",'sClass':'center'},
                 { "mData": "id",'sClass':'center',"mRender": function(data, type, full) {
                     var returnStr="";
                     returnStr += '<i class="Hui-iconfont cursor-pointer" title="禁用" onClick="jinyong(\''+full["id"]+'\')">&#xe6e2;</i>';

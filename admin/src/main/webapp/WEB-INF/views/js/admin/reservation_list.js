@@ -82,6 +82,7 @@ jQuery(function(){
                     }
                     return returnStr;
                 }},
+                { "mData": "tableId",'sClass':'center'},
                 { "mData": "createTime",'sClass':'center'},
                 { "mData": "updateTime",'sClass':'center'},
                 { "mData": "id",'sClass':'center',"mRender": function(data, type, full) {

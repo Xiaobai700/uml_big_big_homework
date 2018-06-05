@@ -59,6 +59,7 @@
 </div>
 <div class="page-c。ontainer">
     <div class="cl pd-5 bg-1 bk-gray mt-20">
+        <span class="l"> <a href="javascript:;" onclick="add_walk_in('添加walk-in','add_walkIn.html','400','300')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加walk-in</a></span>
         <table class="table table-border table-bordered table-bg">
             <thead>
             <tr>
@@ -72,6 +73,7 @@
                 <th width="100">当前状态</th>
                 <th width="100">备注</th>
                 <th width="100">类型</th>
+                <th width="100">餐桌号</th>
                 <th width="100">创建时间</th>
                 <th width="100">最新更新时间</th>
                 <th width="100">操作</th>
@@ -88,6 +90,10 @@
 <script type="text/javascript" src="static/h-ui.admin/js/H-ui.admin.js"></script>
 <script type="text/javascript" src="lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="js/admin/reservation_list.js"></script>
-<script type="text/javascript"></script>
+<script type="text/javascript">
+    function add_walk_in(title,url,w,h) {
+        layer_show(title,url,w,h);
+    }
+</script>
 </body>
 </html>
