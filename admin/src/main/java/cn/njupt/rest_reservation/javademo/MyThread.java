@@ -1,4 +1,4 @@
-package cn.njupt.rest_reservation;
+package cn.njupt.rest_reservation.javademo;
 
 /**
  * Created by zhangqiao on 2019/4/5.
@@ -17,6 +17,7 @@ class  ThreadZy implements Runnable{
         }
     }
 }
+
 public class MyThread {
     public static  void main(String args[]){
 
