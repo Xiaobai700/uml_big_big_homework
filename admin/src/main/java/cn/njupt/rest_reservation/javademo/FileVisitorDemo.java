@@ -2,10 +2,6 @@ package cn.njupt.rest_reservation.javademo;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.DirectoryStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,14 +10,14 @@ import java.util.List;
  */
 public class FileVisitorDemo{
     public static void main(String[] args)throws IOException{
-        //默认取得文档
+        /*//默认取得文档
         String glob = args.length == 0 ? "*" :args[0];
         //取得目前工作路径
         Path userpath = Paths.get(System.getProperty("user.dir"));
         try(DirectoryStream<Path> directoryStream =
                     Files.newDirectoryStream(userpath,glob)) {
 
-        }
+        }*/
         List<String> paths = new ArrayList<>();
         paths = getAllFilePaths(new File("E:\\成绩管理系统导出文件\\学生成绩汇总"),paths);
         for (String path:paths) {

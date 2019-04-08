@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="2d8ae585-f035-4061-b43e-aa85ef0c31e3" name="Default" comment="新建包">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/src/main/java/cn/njupt/rest_reservation/javademo/FileVisitorDemo.java" afterPath="$PROJECT_DIR$/admin/src/main/java/cn/njupt/rest_reservation/javademo/FileVisitorDemo.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/src/main/java/cn/njupt/rest_reservation/service/impl/ReservationServiceImpl.java" afterPath="$PROJECT_DIR$/admin/src/main/java/cn/njupt/rest_reservation/service/impl/ReservationServiceImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/src/main/webapp/WEB-INF/views/js/admin/staff_list.js" afterPath="$PROJECT_DIR$/admin/src/main/webapp/WEB-INF/views/js/admin/staff_list.js" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -54,8 +52,8 @@
       <file leaf-file-name="FileVisitorDemo.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/admin/src/main/java/cn/njupt/rest_reservation/javademo/FileVisitorDemo.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-176">
-              <caret line="17" column="7" lean-forward="false" selection-start-line="17" selection-start-column="7" selection-end-line="17" selection-end-column="7" />
+            <state relative-caret-position="286">
+              <caret line="19" column="11" lean-forward="false" selection-start-line="12" selection-start-column="8" selection-end-line="19" selection-end-column="11" />
               <folding />
             </state>
           </provider>
@@ -1374,7 +1372,7 @@
       <workItem from="1554442254267" duration="11381000" />
       <workItem from="1554516596667" duration="6584000" />
       <workItem from="1554622329194" duration="3378000" />
-      <workItem from="1554690225540" duration="5101000" />
+      <workItem from="1554690225540" duration="5539000" />
     </task>
     <task id="LOCAL-00001" summary="准备工作">
       <created>1527532179657</created>
@@ -1464,7 +1462,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="239100000" />
+    <option name="totallyTimeSpent" value="239538000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -2089,14 +2087,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/admin/src/main/java/cn/njupt/rest_reservation/javademo/NIO2Demo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/admin/src/main/java/cn/njupt/rest_reservation/javademo/ThreadDemo.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1388">
@@ -2105,10 +2095,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/admin/src/main/java/cn/njupt/rest_reservation/javademo/NIO2Demo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/admin/src/main/java/cn/njupt/rest_reservation/javademo/FileVisitorDemo.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-176">
-          <caret line="17" column="7" lean-forward="false" selection-start-line="17" selection-start-column="7" selection-end-line="17" selection-end-column="7" />
+        <state relative-caret-position="286">
+          <caret line="19" column="11" lean-forward="false" selection-start-line="12" selection-start-column="8" selection-end-line="19" selection-end-column="11" />
           <folding />
         </state>
       </provider>
