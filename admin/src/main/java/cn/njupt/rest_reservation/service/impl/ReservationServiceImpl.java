@@ -34,6 +34,7 @@ public class ReservationServiceImpl implements ReservationService {
         try{
             List<Reservation> reservations = reservationMapper.selectAllReservation(map);
             List<Map> list = new ArrayList<>();
+            HashMap map31 = new HashMap();
             for (Reservation reservation:reservations) {
                 String userName = "店小二";
                 Customer customer = customerMapper.selectByPrimaryKey(reservation.getUserId());
